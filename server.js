@@ -1,8 +1,10 @@
 const express = require('express')
 const {graphqlHTTP}=require('express-graphql')
 const schema = require('./graphqlSchema/schema')
+const mongoose = require('mongoose')
 
-
+mongoose.connect("mongodb://localhost:27017/graphqltut",{useNewUrlParser:true,useUnifiedTopology:true})
+mongoose.connection.on('connect',()=>console.log("Server connected to database"))
 const app = express()
 
 app.use('/graphql',graphqlHTTP({
